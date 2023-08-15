@@ -1,0 +1,13 @@
+@each $colorName, $colorValue in $colors{
+    .btn-#{$colorName}{background-color:#{$colorValue} ;
+         border:3px solid darken($colorValue,10%);
+
+color: invert($colorValue,90%);}
+    }
+    @each $sizeName, $sizeValue in $sizes{
+        .btn-#{$sizeName}{font-size:#{$sizeValue};
+             margin:#{$sizeValue / 4} ;
+             padding:#{$sizeValue / 8} #{$sizeValue / 2};
+             border-radius: #{$sizeValue / 2};}
+    }
+
