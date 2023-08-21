@@ -1,6 +1,6 @@
 $darkcolor:#222;
-$cols:36;
-$rows:24;
+$cols:18;
+$rows:12;
 $size:33px;
 @mixin center{
 position: absolute;
@@ -10,12 +10,11 @@ right: 0;
 left: 0;
 margin: auto;
 }
-// @mixin effectfadeout {
-//     animation: fadeout 1s;
-//     animation-fill-mode: forwards;
-//     // animation-delay: 1s  * $offX / $rows + $offy / $rows;
-//     animation-delay: 0.6s * random(5);
-// }
+  @mixin effectfadeout {
+    animation: fadeout 1s forwards linear;
+    animation-delay: 0.6s * random(5);
+}
+
 body{
     background-color: $darkcolor;
     color: lime;
@@ -26,91 +25,116 @@ body{
     border:$size * 0.05 solid lighten($darkcolor, 10%);
     @include center;
 }
-.slide{
+.slide1{
     display: grid;
     grid-template-columns: repeat($cols,$size);
-    grid-template-rows: repeat($rows,$size);
+     grid-template-rows: repeat($rows,$size);
     width: inherit;
     height: inherit;
-    animation: change 6s infinite;
-           
-  @keyframes change {
-            0% { background-image: url(images/1.jpg); }
-
-            33% { background-image:url(images/2.jpg);}
-          
-            66% { background-image: url(images/3.jpg); }
-
-            100%{background-image: url(images/1.jpg);}
-          }
 
 
             $offX:0;
             $offy:0;
     @for $n from 1 through $cols * $rows{
-        &>div:nth-child(#{$n}) {background-image: url(images/1.jpg);
-            
-    background-position-x:$offX * - $size;
-    background-position-y:$offy * - $size;
+        &>div:nth-child(#{$n}){ 
+             background-image: url(images/1.jpg);
+            background-position-x:$offX * - $size;
+            background-position-y:$offy * - $size;
    
-//    @include effectfadeout;
-     animation: fadeout 1s;
-     animation-fill-mode: infinite;
-     animation-delay: 0.6s * random(5);
-            }
+   @include effectfadeout;
+    }
             $offX:$offX + 1;
             @if $offX % $cols==0{
                 $offX:0;
-                $offy:$offy + 1;
-            }
-            @for $n from 1 through $cols * $rows{
-                &>div:nth-child(#{$n}) {background-image: url(images/2.jpg);
-                    
-            background-position-x:$offX * - $size;
-            background-position-y:$offy * - $size;
-           
-        //    @include effectfadeout;
-             animation: fadeout 1s;
-             animation-fill-mode: infinite;
-             animation-delay: 2s * random(5);
-                    }
-                    $offX:$offX + 1;
-                    @if $offX % $cols==0{
+               $offy:$offy + 1;
+             }
+            
+        }
+                
+    
+        }
+            .slide2{
+                display: grid;
+                @include center;
+                z-index: -1;
+                grid-template-columns: repeat($cols,$size);
+                grid-template-rows: repeat($rows,$size);
+                width: inherit;
+                height: inherit;
+            
+            
                         $offX:0;
-                        $offy:$offy + 1;
-                    }
-                }
+                        $offy:0;
                 @for $n from 1 through $cols * $rows{
-                    &>div:nth-child(#{$n}) {background-image: url(images/3.jpg);
-                        
-                background-position-x:$offX * - $size;
-                background-position-y:$offy * - $size;
+                    &>div:nth-child(#{$n}){ 
+                        background-image: url(images/2.jpg);
+                        background-position-x:$offX * - $size;
+                        background-position-y:$offy * - $size;
                
-            //    @include effectfadeout;
-                 animation: fadeout 1s;
-                 animation-fill-mode: infinite;
-                 animation-delay: 4s * random(5);
-                        }
+                        animation: fadeout2 2s forwards linear;
+                        animation-delay:1s * random(5);
+                       
+        
+               }
                         $offX:$offX + 1;
                         @if $offX % $cols==0{
                             $offX:0;
                             $offy:$offy + 1;
                         }
+                        
                     }
-        }
+                        
+                }
+            .slide3{
+                 display: grid;
+                 @include center;
+                 z-index: -2;
+                 grid-template-columns: repeat($cols,$size);
+                 grid-template-rows: repeat($rows,$size);
+                           width: inherit;
+                           height: inherit;
+                        
+                        
+                                   $offX:0;
+                                    $offy:0;
+                             @for $n from 1 through $cols * $rows{
+                                 &>div:nth-child(#{$n}){ 
+                                    background-image: url(images/3.jpg);
+                                     background-position-x:$offX * - $size;
+                                     background-position-y:$offy * - $size;
+                           
+                                     animation: fadeout3 2s forwards linear;
+                                     animation-delay:1s * random(5);
+                                 }
+                                @if $offX % $cols==0{
+                                        $offX:0;
+                                         $offy:$offy + 1;
+                                    }
+                                    
+                                 }
+                                       
+                            
+                                    }
+
+           
+                        @keyframes fadeout {
+                            from{opacity:1;}
+    
+                              to{opacity:0;}
             
-            @keyframes fadeout {
-               from{opacity:1;} 
-              to{opacity:0;}
-
-             }
-        
-            }
-            div{
-            display: grid;
-            &>span{
-             align-self: center;
-             justify-self: center; 
-             }}
-
-   
+                         }
+                         @keyframes fadeout2 {
+                            0%{opacity:0;}
+                            33%{opacity: 1;}
+                            66% {opacity: 1;} 
+                            100%{opacity:0;}
+            
+                         }
+                         @keyframes fadeout3 {
+                            0%{opacity:0;}
+                            33%{opacity: 0;}
+                            66% {opacity: 1;} 
+                            100%{opacity:0;}
+            
+                         }
+                         
